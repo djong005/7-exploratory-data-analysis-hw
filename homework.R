@@ -1,5 +1,7 @@
 library(tidyverse)
+install.packages("DataExplorer")
 library(DataExplorer)
+install.packages("rstatix")
 library(rstatix)
 
 stations <- c("KCLT", "KCQT", "KHOU", "KIND", "KJAX", "KMDW", "KNYC", "KPHL", "KPHX", "KSEA")
@@ -14,7 +16,9 @@ cities <- c("Charlotte", "Los Angeles", "Houston", "Indianapolis", "Jacksonville
 #> The function should return a tibble
 #> Call the function "read_weather" 
 #> Check by reading/glimpsing a single station's file
-
+read_weather <- function(station) {
+  a <-
+}
 
 
 # QUESTION 2
