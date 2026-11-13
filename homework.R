@@ -3,6 +3,7 @@ install.packages("DataExplorer")
 library(DataExplorer)
 install.packages("rstatix")
 library(rstatix)
+library(here)
 
 stations <- c("KCLT", "KCQT", "KHOU", "KIND", "KJAX", "KMDW", "KNYC", "KPHL", "KPHX", "KSEA")
 cities <- c("Charlotte", "Los Angeles", "Houston", "Indianapolis", "Jacksonville", 
@@ -16,10 +17,54 @@ cities <- c("Charlotte", "Los Angeles", "Houston", "Indianapolis", "Jacksonville
 #> The function should return a tibble
 #> Call the function "read_weather" 
 #> Check by reading/glimpsing a single station's file
-read_weather <- function(station) {
-  a <-
+here()
+
+read_weather <- function(s) {
+
+  if (s == "KCLT") {
+    charlotte <- read_csv("us-weather-history/KCLT.csv")
+    charlotte <- charlotte |> mutate(station = "Charlotte",.before=1)
+    return(charlotte)
+  } else if (s == "KCQT") {
+    la <- read_csv("us-weather-history/KCQT.csv")
+      la <- la |> mutate(station = "Los Angeles",.before=1)
+      return(la)
+  } else if (s == "KHOU") {
+    houston <- read_csv("us-weather-history/KHOU.csv")
+    houston <- houston |> mutate(station = "Houston",.before=1)
+    return(houston)
+  } else if (s == "KIND") {
+    ind <- read_csv("us-weather-history/KIND.csv")
+    ind <- ind |> mutate(station = "Indianapolis",.before=1)
+    return(ind)
+  } else if (s == "KJAX") {
+    jack <- read_csv("us-weather-history/KJAX.csv")
+    jack <- jack |> mutate(station = "Jacksonville",.before=1)
+    return(jack)
+  } else if (s == "KMDW") {
+    chic <- read_csv("us-weather-history/KMDW.csv")
+    chic <- chic |> mutate(station = "Chicago",.before=1)
+    return(chic)
+  } else if (s == "KNYC") {
+    nyc <- read_csv("us-weather-history/KNYC.csv")
+    nyc <- nyc |> mutate(station = "New York City",.before=1)
+    return(nyc)
+  } else if (s == "KPHL") {
+    phil <- read_csv("us-weather-history/KPHL.csv")
+    phil <- phil |> mutate(station = "Philadelphia",.before=1)
+    return(phil)
+  } else if (s == "KPHX") {
+    phx <- read_csv("us-weather-history/KPHX.csv")
+    phx <- phx |> mutate(station = "Phoenix",.before=1)
+    return(phx)
+  } else if (s == "KSEA") {
+    sea <- read_csv("us-weather-history/KSEA.csv")
+    sea <- sea |> mutate(station = "Seattle",.before=1)
+    return(sea)
+  }
 }
 
+read_weather("KSEA")
 
 # QUESTION 2
 #> Use map() and your new function to read in all 10 stations
@@ -27,7 +72,8 @@ read_weather <- function(station) {
 #> you will need to do so in the code with bind_rows()
 #> Save the resulting dataset to "ds"
 
-
+ds <- map(stations, read_weather) |> 
+  bind_rows()
 
 
 # QUESTION 3
