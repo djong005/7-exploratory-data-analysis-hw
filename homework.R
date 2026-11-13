@@ -83,15 +83,30 @@ ds <- map(stations, read_weather) |>
 #> and save the results to a new tibble
 #> Write a logical statement that would trigger a warning if any city did not have 365 days
 
+city <- factor(stations)
+freq <- freq_table(ds$station)
 
-
+if(any(freq$n != 365)) {
+  print("A city does NOT have 365 days")
+  print(freq)
+} else {
+  print("All cities have 365 days")
+}
 
 # QUESTION 4
 #> In question 3, all of the cities do have 365 days of data, so how would you know
 #> if your check worked? Create a test to mess up the dataset to make sure that your
 #> check does throw an error if the conditions aren't met
 
+freq2 <- freq |> mutate(n2 = n +1)
 
+if(any(freq2$n2 != 365)) {
+  print("A city does NOT have 365 days")
+  print(freq2)
+} else {
+  print("All cities have 365 days")
+}
+#it worked
 
 #> At this point, your data should look like the "compiled_data.csv" file
 #> in data-clean. If it isn't, read in that file to use for the remaining
